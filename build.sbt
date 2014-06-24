@@ -1,4 +1,4 @@
-name := """play-scala"""
+name := """wibbly-wobbly"""
 
 version := "1.0-SNAPSHOT"
 
