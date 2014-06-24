@@ -2,4 +2,13 @@
     .col-md-9 {
         padding-left: 30px;
     }
+
+    .header {
+        margin-top: 20px;
+    }
+}
+
+.sidebar {
+    padding-right: 16px;
+    max-width: 280px;
 }
