@@ -1,0 +1,5 @@
+@media (min-width: 992px) {
+    .col-md-9 {
+        padding-left: 30px;
+    }
+}

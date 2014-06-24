@@ -1,0 +1,15 @@
+@(title: String)
+
+@main(title) {
+    <div class="row" style="min-height : 16 px"></div>
+    <div class="sidebar col-md-3" style="padding-right : 16 px">
+    @sidebar(new User("Giymo11", "trele"))
+    </div>
+    <div class="content col-md-9">
+        <div class="header row">
+        @breadcrumb(Array("Project", "Role", "Feature", "Task", "Test"))
+        </div>
+        <h1>Wibbly Wobbly</h1>
+    </div>
+
+}

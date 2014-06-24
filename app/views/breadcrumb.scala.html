@@ -1,0 +1,7 @@
+@(position: Array[String])
+
+<ol class="breadcrumb">
+    @for(item <- position) {
+        <li>@item</li>
+    }
+</ol>
