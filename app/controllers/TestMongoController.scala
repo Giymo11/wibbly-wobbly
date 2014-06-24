@@ -1,7 +1,7 @@
 package controllers
 
-import play.mvc.Controller
-
+import play.api.mvc.Controller
+import play.modules.reactivemongo.MongoController
 
 /**
  * Created by Gizmo on 2014-06-24.
