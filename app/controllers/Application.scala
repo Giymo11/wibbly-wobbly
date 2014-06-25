@@ -16,5 +16,4 @@ object Application extends Controller {
   def home = Action {
     Ok(views.html.home("Wibbly Wobbly Startpage"))
   }
-
 }
