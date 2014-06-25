@@ -1,1 +1,1 @@
-web: target/universal/stage/bin/wibbly-wobbly -Dhttp.port=${PORT} -Ddb.default.url=${DATABASE_URL}
+web: target/universal/stage/bin/wibbly-wobbly -Dhttp.port=${PORT} -Ddb.default.url=${HEROKU_POSTGRESQL_GREEN_URL} -Ddb.default.user=${GREEN_USER} -Ddb.default.password=${GREEN_PASSWORD}
