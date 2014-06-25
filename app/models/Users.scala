@@ -16,3 +16,4 @@ class Users(tag: Tag) extends Table[User](tag, "users") {
 
   override def * = (id, email, username, password) <> (User.tupled, User.unapply)
 }
+
