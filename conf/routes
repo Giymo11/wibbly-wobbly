@@ -3,10 +3,18 @@
 # ~~~~
 
 # Home page
-GET        /                    controllers.Application.index
-GET        /help                controllers.Application.help
-GET        /home                controllers.Application.home
-GET        /polymer_home                controllers.Application.polymer_home
+GET           /                    controllers.Application.index
+GET           /help                controllers.Application.help
+GET           /home                controllers.Application.home
+GET           /polymer_home        controllers.Application.polymer_home
 
 # Map static resources from the /public folder to the /assets URL path
-GET        /public/*file        controllers.Assets.at(path="/public", file)
+GET           /public/*file        controllers.Assets.at(path="/public", file)
+
+
+#REST
+GET           /users/:id           controllers.Application.user(id : Int)
+GET           /users               controllers.Application.users
+POST          /users/              controllers.Application.createUser
+PUT           /users/:id           controllers.Application.updateUser(id: Int)
+DELETE        /users/:id           controllers.Application.deleteUser(id: Int)
