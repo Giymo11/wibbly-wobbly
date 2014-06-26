@@ -1,8 +1,62 @@
 @(card1: String, card2: String, card3: String)
 
-@polymer_main("Is this working?")(Array("/public/polymer-elements/lorem-element.html")) {
-    <lorem-element></lorem-element>
-    <p>@card1</p>
-    <p>@card2</p>
-    <p>@card3</p>
+@polymer_main("Is this working?")(Array()) {
+    <div class="sidebar">
+        <div class="status status-default">
+            <h2>username</h2>
+            <a href="#settings">Settings</a>
+            <a href="#statistics">Statistics</a>
+        </div>
+        <div class="projects">
+            <ul class="nav">
+                @for(project <- Array("Project 1", "Project 2", "Project 3")) {
+                    <li class="nav-item">@project</li>
+                }
+            </ul>
+        </div>
+    </div>
+    <div class="header">
+        <div class="tabs">
+            <ul class="tabs-items">
+            @for(navItem <- Array( "Tasks", "Timeline & Roadmap", "TILs Blog", "Permissions")) {
+                <li class="nav-item">@navItem</li>
+            }
+            </ul>
+        </div>
+    </div>
+    <div class="actionbar">
+        <input type="search">
+        <ul>
+        @for(tag <- Array("to do", "started", "for review", "finished")) {
+            <li><input type="checkbox"> @tag</li>
+        }
+        </ul>
+        <button>create</button>
+    </div>
+    <div class="content">
+        <ul>
+            <li>As a user</li>
+            <li>
+                <ul>
+                    <li>I want to be able to record tasks</li>
+                    <li>
+                        <ul>
+                            <li>Design task page</li>
+                            <li>Backend implementaion</li>
+                            <ul>
+                                <li>REST api available on /tasks</li>
+                            </ul>
+                            <li>Frontend implementation</li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li>When connection to server is lost</li>
+            <li>
+                <ul>
+                    <li>Notify user that information is not persisted</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
 }

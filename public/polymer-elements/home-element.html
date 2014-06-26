@@ -4,11 +4,9 @@
 <link rel="import" href="../components/core-icon-button/core-icon-button.html">
 <link rel="import" href="../components/core-toolbar/core-toolbar.html">
 <link rel="import" href="../components/core-header-panel/core-header-panel.html">
-<link rel="import" href="../components/paper-ripple/paper-ripple.html">
-<link rel="import" href="../components/paper-progress/paper-progress.html">
-<link rel="import" href="../components/paper-button/paper-button.html">
 
-<polymer-element name="my-element">
+<polymer-element name="home-element">
+
     <template>
         <style>
             :host {
@@ -19,10 +17,10 @@
             }
             #core_drawer_panel {
                 position: absolute;
-                top: 50px;
+                top: 30px;
                 right: 0px;
                 bottom: 0px;
-                left: 0px;
+                left: 30px;
                 height: 90%;
                 width: 90%;
             }
@@ -73,44 +71,18 @@
                 right: 0px;
                 top: 0px;
             }
-            #core_scaffold {
-                position: absolute;
-                top: 590px;
-                right: 0px;
-                bottom: 0px;
-                left: 1800px;
-            }
-            #core_drawer_panel1 {
-                position: absolute;
-                top: 540px;
-                right: 0px;
-                bottom: 0px;
-                left: 1750px;
-            }
-            #core_tooltip {
-                left: 1770px;
-                top: 820px;
-            }
-            #paper_ripple {
-                width: 300px;
-                height: 300px;
-            }
         </style>
         <core-drawer-panel id="core_drawer_panel">
             <section id="section" drawer>
-                <core-menu selected="1" selectedindex="1" id="core_menu">
-                    <core-submenu label="Learn web component" icon="settings" id="core_submenu">
+                <core-menu selected="0" selectedindex="0" id="core_menu">
+                    <core-submenu active label="Learn web component" icon="settings" id="core_submenu">
                         <core-item label="Shadow DOM" id="core_item" horizontal center layout></core-item>
                         <core-item label="Custom elements" id="core_item1" horizontal center layout></core-item>
                     </core-submenu>
-                    <core-submenu active selected="3" label="Favorites" icon="settings" id="core_submenu1">
+                    <core-submenu label="Favorites" icon="settings" id="core_submenu1">
                         <core-item label="Favorite 1" id="core_item2" horizontal center layout></core-item>
                         <core-item label="Favorite 2" id="core_item3" horizontal center layout></core-item>
                         <core-item label="Favorite 3" id="core_item4" horizontal center layout></core-item>
-                        <core-submenu active label="Topics" id="core_submenu2">
-                            <core-item label="Topic 1" id="core_item5" horizontal center layout></core-item>
-                            <core-item label="Topic 2" id="core_item6" horizontal center layout></core-item>
-                        </core-submenu>
                     </core-submenu>
                 </core-menu>
             </section>
@@ -122,22 +94,17 @@
                     </core-toolbar>
                     <section id="section2" vertical layout center>
                         <core-card id="core_card" center horizontal layout center-justified>
-                            <div id="div1">@card1</div>
+                            <div id="div1">Polymer</div>
                             <core-icon-button icon="favorite" id="core_icon_button1" theme="core-light-theme"></core-icon-button>
                         </core-card>
                         <core-card id="core_card1" center horizontal layout center-justified>
-                            <div id="div4">@card2</div>
+                            <div>heart</div>
                             <core-icon-button icon="favorite" id="core_icon_button1" theme="core-light-theme"></core-icon-button>
                         </core-card>
                         <core-card id="core_card2" center horizontal layout center-justified>
-                            <div id="div2">@card3</div>
+                            <div>web components!</div>
                             <core-icon-button icon="favorite" id="core_icon_button1" theme="core-light-theme"></core-icon-button>
-                            <paper-ripple id="paper_ripple"></paper-ripple>
-                            <paper-progress step="5" value="20" ratio="20" id="paper_progress"></paper-progress>
-                            <paper-button label="Paper Button" id="paper_button"></paper-button>
                         </core-card>
-                        <div id="div3" layout horizontal>
-                        </div>
                     </section>
                 </core-header-panel>
             </section>
@@ -146,7 +113,7 @@
 
     <script>
 
-        Polymer('my-element', {
+        Polymer('home-element', {
 
         });
 
