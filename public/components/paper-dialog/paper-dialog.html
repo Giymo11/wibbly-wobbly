@@ -27,9 +27,8 @@ Example:
 
     <link href="paper-dialog.css" rel="stylesheet">
 
-    <div id="shadow">
-      <paper-shadow z="3" hasPosition></paper-shadow>
-    </div>
+    <div id="shadow"></div>
+    <paper-shadow z="3" target="{{$.shadow}}" hasPosition></paper-shadow>
 
     <core-overlay id="overlay" opened="{{opened}}" target="{{}}" sizingTarget="{{$.container}}" closeSelector="[dismissive],[affirmative]" transition="{{transition}}" margin="20"></core-overlay>
 

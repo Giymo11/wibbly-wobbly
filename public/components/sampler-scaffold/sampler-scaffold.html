@@ -17,10 +17,10 @@ sampler-scaffold
 <link rel="import" href="../core-toolbar/core-toolbar.html">
 <link rel="import" href="../core-drawer-panel/core-drawer-panel.html">
 <link rel="import" href="../core-header-panel/core-header-panel.html">
+<link rel="import" href="../core-icon-button/core-icon-button.html">
 <link rel="import" href="../core-item/core-item.html">
 <link rel="import" href="../core-menu/core-menu.html">
 <link rel="import" href="../core-menu/core-submenu.html">
-<link rel="import" href="../core-icon-button/core-icon-button.html">
 
 <polymer-element name="sampler-scaffold" attributes="label responsiveWidth">
 <template>
@@ -29,22 +29,29 @@ sampler-scaffold
 
   <core-drawer-panel id="drawerPanel" narrow="{{narrow}}" responsiveWidth="{{responsiveWidth}}">
 
-    <core-header-panel id="mainHeaderPanel" main mode="{{narrow ? 'waterfall' : 'cover'}}" shadow>
+    <core-header-panel drawer mode="waterfall">
 
-      <core-toolbar class="{{ {'medium-tall' : !narrow} | tokenList }}">
-        <content select=".menuButton" on-tap="{{togglePanel}}">
-          <core-icon-button class="menuButton fallback" icon="menu"></core-icon-button>
-        </content>
-        <div hidden?="{{!narrow}}">{{item.label}}</div>
-        <content select=".sourceButton" on-tap="{{viewSourceAction}}">
-          <core-icon-button class="sourceButton fallback" icon="launch"></core-icon-button>
-        </content>
+      <core-toolbar class="{{ {tall : !narrow} | tokenList }}">
+        <div>{{label}}</div>
+      </core-toolbar>
+      
+      <core-menu id="menu" on-core-select="{{menuSelect}}">
+        <content></content>
+      </core-menu>
 
+    </core-header-panel>
+    
+    <core-header-panel id="mainHeaderPanel" main mode="{{narrow ? 'waterfall' : 'cover'}}">
+
+      <core-toolbar class="{{ {tall : !narrow} | tokenList }}">
+      
+        <core-icon-button id="menuButton" icon="menu" on-tap="{{togglePanel}}"></core-icon-button>
+        <div flex class="toolbar-label">{{item.tag ? '&lt;' + item.tag + '&gt;' : item.label}}</div>
+        <core-icon-button class="action-button" icon="launch" on-click="{{viewSourceAction}}"></core-icon-button>
+        
       </core-toolbar>
       
       <div id="card" on-transitionend="{{cardTransitionDone}}" hidden?="{{!item}}">
-
-        <div class="element-label" hidden?="{{narrow}}">{{item.label}}</div>
 
         <div id="frameContainer">
           <iframe id="frame" on-load="{{frameLoaded}}"></iframe>
@@ -52,18 +59,6 @@ sampler-scaffold
         
       </div>
       
-    </core-header-panel>
-
-    <core-header-panel drawer>
-
-      <core-toolbar class="{{ {'medium-tall' : !narrow} | tokenList }}">
-        <div class="bottom main-label fit">{{label}}</div>
-      </core-toolbar>
-      
-      <core-menu id="menu" on-core-select="{{menuSelect}}">
-        <content></content>
-      </core-menu>
-
     </core-header-panel>
 
   </core-drawer-panel>
@@ -76,7 +71,6 @@ sampler-scaffold
     responsiveWidth: '860px',
     
     ready: function() {
-      this.boundResizeFrame = this.resizeFrame.bind(this);
       window.addEventListener('resize', this.updateFrameHeight.bind(this));
       window.addEventListener('hashchange', this.parseLocationHash.bind(this));
     },
@@ -101,9 +95,6 @@ sampler-scaffold
     menuSelect: function(e, detail) {
       if (detail.isSelected) {
         this.item = detail.item;
-        if (this.item.children.length) {
-          this.item.selected = 0;
-        }
         this.item.tag = this.item.getAttribute('tag');
         var url = this.item.getAttribute('url');
         this.$.frame.contentWindow.location.replace(url);
@@ -125,7 +116,7 @@ sampler-scaffold
         this.async(function() {
           this.$.card.classList.add('move-up');
           this.moveCard(null);
-        }, null, 300);
+        }, null, 100);
       });
     },
     
@@ -152,15 +143,7 @@ sampler-scaffold
       }
       this.$.frame.contentWindow.addEventListener('polymer-ready', function() {
         setTimeout(this.updateFrameHeight.bind(this), 100);
-        this.$.frame.contentWindow.addEventListener('core-resize',
-          this.boundResizeFrame, false);
       }.bind(this));
-    },
-
-    resizeFrame: function() {
-      this.job('resizeFrame', function() {
-        this.updateFrameHeight();
-      });
     },
     
     updateFrameHeight: function() {
@@ -168,18 +151,14 @@ sampler-scaffold
       var doc = frame.contentDocument;
       if (doc) {
         var docElt = doc.documentElement;
-        // TODO(ffu); expose scroll info from header-panel
-        var pos = this.$.mainHeaderPanel.$.mainContainer.scrollTop;
         frame.style.height = 'auto';
         frame.style.height = docElt.scrollHeight + 'px';
+        // to avoid the 'blinking bug'
+        // https://code.google.com/p/chromium/issues/detail?id=332024
         if (doc.body) {
           var s = doc.body.style;
-          s.overflow = 'hidden';
-          // to avoid the 'blinking bug'
-          // https://code.google.com/p/chromium/issues/detail?id=332024
           s.webkitTransform = s.transform = 'translateZ(0)';
         }
-        this.$.mainHeaderPanel.$.mainContainer.scrollTop = pos;
       }
     },
     

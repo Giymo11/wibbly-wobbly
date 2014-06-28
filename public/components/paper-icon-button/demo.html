@@ -13,7 +13,8 @@ license that can be found in the LICENSE file.
     <link rel="import" href="../core-icons/core-icons.html">
     <link rel="import" href="../core-icons/iconsets/maps-icons.html">
     <link rel="import" href="../core-icons/iconsets/social-icons.html">
-    <link rel="import" href="../core-selector/core-selector.html">
+    <link rel="import" href="../polymer-selector/polymer-selector.html">
+    <link rel="import" href="../paper-shadow/paper-shadow.html">
     <link rel="import" href="paper-icon-button.html">
 
     <style shim-shadowdom>
@@ -45,7 +46,7 @@ license that can be found in the LICENSE file.
         fill: #fe774d;
       }
 
-      core-selector paper-icon-button:not([active])::shadow core-icon {
+      polymer-selector paper-icon-button:not([active])::shadow core-icon {
         fill: #c9c9c9;
       }
     </style>
@@ -84,12 +85,12 @@ license that can be found in the LICENSE file.
   
       <section>
         <span>segmented</span>
-        <core-selector selected="1">
+        <polymer-selector selected="1">
           <paper-icon-button fill isToggle icon="maps:directionswalk"></paper-icon-button>
           <paper-icon-button fill isToggle icon="maps:directions-bike"></paper-icon-button>
           <paper-icon-button fill isToggle icon="maps:directions-transit"></paper-icon-button>
           <paper-icon-button fill isToggle icon="maps:directions-car"></paper-icon-button>
-        </core-selector>
+        </polymer-selector>
       </section>
 
     </column>
