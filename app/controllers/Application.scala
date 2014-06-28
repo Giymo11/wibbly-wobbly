@@ -1,15 +1,17 @@
 package controllers
 
-import play.api.mvc._
-import scala.slick.driver.PostgresDriver.simple._
-
 import models._
 import play.api.Play.current
 import play.api.db.slick._
-import play.api.libs.json.{JsValue, Writes, Json}
-import play.api.libs.json._
 import play.api.libs.functional.syntax._
+import play.api.libs.json._
+import play.api.mvc._
+
+import scala.slick.driver.PostgresDriver.simple._
+import scala.slick.lifted.TableQuery
+
 object Application extends Controller {
+
 
 
   implicit val userReads: Reads[User]= (
@@ -50,6 +52,15 @@ object Application extends Controller {
 
   def polymer_home = Action {
     Ok(views.html.polymer_home("Card 1", "Card 2", "Card 3"))
+  }
+
+  def insertUser = Action {
+    DB withSession { implicit session =>
+      //users += User(1, "test.test@test.com", "testuser", "test")
+      val users = TableQuery[Users]
+      users.filter(_.id === 1).delete
+    }
+    Ok("Works")
   }
 
   def user(id:Int) = Action{

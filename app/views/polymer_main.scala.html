@@ -7,7 +7,7 @@
         <title>@title</title>
         <script src="/public/components/platform/platform.js"></script>
         @for(component <- components) {
-            <link rel="import" href=@("/public/" + component)>
+            <link rel="import" href=@(component)>
         }
     </head>
     <body>

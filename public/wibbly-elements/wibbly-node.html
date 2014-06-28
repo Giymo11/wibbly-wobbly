@@ -1,0 +1,81 @@
+<link rel="import" href="/public/components/polymer/polymer.html">
+<link rel="import" href="/public/components/core-icons/core-icons.html">
+<link rel="import" href="/public/components/paper-icon-button/paper-icon-button.html">
+    <link rel="import" href="../components/core-icons/iconsets/device-icons.html">
+    <link rel="import" href="../components/core-icons/iconsets/image-icons.html">
+<link href='http://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900' rel='stylesheet' type='text/css'>
+        <!-- remember: Thin - 100, Light - 300, Normal - 400, Medium - 500, Bold - 700, UBold - 900 -->
+
+<polymer-element name="wibbly-node" attributes="name desc estim tracked">
+    <template>
+        <style>
+            paper-icon-button {
+                opacity: 0.67;
+            }
+            div {
+                font-family: 'Roboto', sans-serif;
+                color: black;
+            }
+            .secondary {
+                opacity: 0.54;
+            }
+            .time {
+                text-align: right;
+                color: black;
+                margin-right: 8px;
+                font-size: 10pt;
+            }
+            h6 {
+                font-size: 18pt;
+                font-weight: 500;
+                opacity: 0.87;
+                line-height: 32pt;
+                /* letter-spacing: 5pt;*/
+                margin: 0;
+                margin-top: -8px;
+            }
+            p {
+                font-size: 12pt;
+                font-weight: 400;
+                opacity: 0.76;
+                line-height: 16pt;
+                margin: 0;
+                /* letter-spacing: 5pt; */
+            }
+            .overview {
+                margin-left: 32px;
+                padding: 8px;
+            }
+            .times {
+                width: 112px;
+                padding: 8px;
+            }
+        </style>
+        <div class="body" >
+            <div horizontal layout>
+                <div class="times" vertical layout center-justified>
+                    <div class="track" horizontal layout reverse center>
+                        <paper-icon-button icon="device:timer"></paper-icon-button>
+                        <div class="time secondary" center>{{tracked}} h</div>
+                    </div>
+                    <div horizontal layout reverse center style="margin-top: -8px">
+                        <paper-icon-button icon="image:timelapse"></paper-icon-button>
+                        <div class="time secondary" center>{{estim}} h</div>
+                    </div>
+                </div>
+                <div class="overview" vertical layout center-justified flex>
+                    <h6>{{name}}</h6>
+                    <p>{{desc}}</p>
+                </div>
+            </div>
+        </div>
+    </template>
+    <script>
+        Polymer('wibbly-node', {
+            name: "Title",
+            desc: "Description",
+            tracked: "12",
+            estim: "28"
+        });
+    </script>
+</polymer-element>

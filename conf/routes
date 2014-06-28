@@ -3,10 +3,12 @@
 # ~~~~
 
 # Home page
+
 GET           /                    controllers.Application.index
 GET           /help                controllers.Application.help
 GET           /home                controllers.Application.home
 GET           /polymer_home        controllers.Application.polymer_home
+GET           /insertUser          controllers.Application.insertUser
 
 # Map static resources from the /public folder to the /assets URL path
 GET           /public/*file        controllers.Assets.at(path="/public", file)
