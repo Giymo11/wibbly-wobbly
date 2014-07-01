@@ -3,14 +3,22 @@
 <link rel="import" href="/public/components/paper-icon-button/paper-icon-button.html">
     <link rel="import" href="../components/core-icons/iconsets/device-icons.html">
     <link rel="import" href="../components/core-icons/iconsets/image-icons.html">
+    <link rel="import" href="../components/core-icons/iconsets/communication-icons.html">
 <link href='http://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900' rel='stylesheet' type='text/css'>
         <!-- remember: Thin - 100, Light - 300, Normal - 400, Medium - 500, Bold - 700, UBold - 900 -->
+<link rel="import" href="/public/components/paper-button/paper-button.html">
 
-<polymer-element name="wibbly-node" attributes="name desc estim tracked">
+<polymer-element name="wibbly-node" attributes="name shortdesc longdesc estim tracked extended id collabs tils">
     <template>
         <style>
-            paper-icon-button {
+            .simple paper-icon-button {
                 opacity: 0.67;
+            }
+            .extended paper-icon-button {
+                opacity: 0.76;
+            }
+            paper-button {
+                opacity: 0.87;
             }
             div {
                 font-family: 'Roboto', sans-serif;
@@ -37,22 +45,66 @@
             p {
                 font-size: 12pt;
                 font-weight: 400;
-                opacity: 0.76;
                 line-height: 16pt;
                 margin: 0;
                 /* letter-spacing: 5pt; */
             }
+            p.shortdesc {
+                opacity: 0.76;
+            }
+            p.longdesc {
+                opacity: 0.87;
+            }
             .overview {
-                margin-left: 32px;
-                padding: 8px;
+                margin-left: 48px;
             }
             .times {
                 width: 112px;
+            }
+            .simple {
                 padding: 8px;
             }
+            .extended {
+                padding-left: 72px;
+                padding-right: 72px;
+                padding-top: 48px;
+                border-bottom: 1px solid rgba(0, 0, 0, 0.32);
+                margin-bottom: 8px;
+            }
+            h3 {
+                font-size: 28pt;
+                font-weight: 300;
+                opacity: 0.76;
+                line-height: 34pt;
+                margin: 0;
+                /* letter-spacing: 5pt; */
+            }
+            h5 {
+                font-size: 16pt;
+                font-weight: 700;
+                opacity: 0.54;
+                line-height: 20pt;
+                margin: 0;
+                margin-top: 8px;
+                margin-bottom: 8px;
+            }
+            :host {
+                max-width: 600px;
+            }
+            .buttonbar {
+                padding-top: 8px;
+                padding-bottom: 8px;
+            }
+            img {
+                height: 64px;
+                width: 64px;
+                border-radius: 50%;
+                margin-left: 8px;
+                margin-bottom: 8px;
+            }
         </style>
-        <div class="body" >
-            <div horizontal layout>
+        <template if="{{!extended}}">
+            <div horizontal layout class="simple">
                 <div class="times" vertical layout center-justified>
                     <div class="track" horizontal layout reverse center>
                         <paper-icon-button icon="device:timer"></paper-icon-button>
@@ -65,17 +117,64 @@
                 </div>
                 <div class="overview" vertical layout center-justified flex>
                     <h6>{{name}}</h6>
-                    <p>{{desc}}</p>
+                    <p class="shortdesc">{{shortdesc}}</p>
                 </div>
             </div>
-        </div>
+        </template>
+        <template if="{{extended}}">
+            <div vertical layout class="extended">
+                <div horizontal layout>
+                    <div vertical layout>
+                        <h3>{{name}}</h3>
+                        <h5>{{shortdesc}}</h5>
+                        <p class="longdesc">{{longdesc}}</p>
+                    </div>
+                    <div vertival layout>
+                        <template repeat="{{ collab in collabs }}">
+                            <img src="{{collab.pic}}" />
+                        </template>
+                    </div>
+                </div>
+                <div class="buttonbar" horizontal around-justified layout>
+                    <div horizontal center layout>
+                        <div class="time secondary" center>{{tracked}} h</div>
+                        <paper-icon-button icon="device:timer"></paper-icon-button>
+                        <paper-button label="start tracking"></paper-button>
+                    </div>
+                    <div horizontal center layout>
+                        <div class="time secondary" center>{{estim}} h</div>
+                        <paper-icon-button icon="image:timelapse"></paper-icon-button>
+                        <paper-button label="show estimate"></paper-button>
+                    </div>
+                    <div horizontal center layout>
+                        <div class="time secondary" center>{{tils}}</div>
+                        <paper-icon-button icon="communication:forum"></paper-icon-button>
+                        <paper-button label="show TILs"></paper-button>
+                    </div>
+                </div>
+            </div>
+        </template>
     </template>
     <script>
         Polymer('wibbly-node', {
-            name: "Title",
-            desc: "Description",
+            name: "Name",
+            shortdesc: "Short Description",
             tracked: "12",
-            estim: "28"
+            estim: "28",
+            extended: false,
+            longdesc: "Lorem ipsum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus volutpat erat sed faucibus feugiat. Donec porta nunc vitae nunc condimentum malesuada. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Etiam lobortis velit metus, quis viverra libero eleifend nec.",
+            id: -1,
+            tils: 5,
+            collabs: [{
+                id: -1,
+                pic: "/public/images/shinobu-icon.png",
+                contrib: 77
+            },
+            {
+                id: -1,
+                pic: "/public/images/shinobu-icon.png",
+                contrib: 23
+            }]
         });
     </script>
 </polymer-element>
