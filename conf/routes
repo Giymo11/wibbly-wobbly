@@ -4,19 +4,47 @@
 
 # Home page
 
-GET           /                    controllers.Application.index
-GET           /help                controllers.Application.help
-GET           /home                controllers.Application.home
-GET           /polymer_home        controllers.Application.polymer_home
-GET           /insertUser          controllers.Application.insertUser
+GET           /                            controllers.Application.index
+GET           /help                        controllers.Application.help
+GET           /home                        controllers.Application.home
+GET           /polymer_home                controllers.Application.polymer_home
 
 # Map static resources from the /public folder to the /assets URL path
-GET           /public/*file        controllers.Assets.at(path="/public", file)
+GET           /public/*file                controllers.Assets.at(path="/public", file)
 
 
 #REST
-GET           /users/:id           controllers.Application.user(id : Int)
-GET           /users               controllers.Application.users
-POST          /users/              controllers.Application.createUser
-PUT           /users/:id           controllers.Application.updateUser(id: Int)
-DELETE        /users/:id           controllers.Application.deleteUser(id: Int)
+
+#Users
+GET           /users/:id                   controllers.Application.user(id : Int)
+GET           /users                       controllers.Application.users
+POST          /users                       controllers.Application.createUser
+PUT           /users/:id                   controllers.Application.updateUser(id: Int)
+DELETE        /users/:id                   controllers.Application.deleteUser(id: Int)
+
+#TILs
+GET           /tils/:id                    controllers.Application.til(id: Int)
+GET           /tils                        controllers.Application.tils
+GET           /tils/node/:id               controllers.Application.tilsNode(id: Int)
+GET           /tils/user/:id               controllers.Application.tilsUser(id: String)
+POST          /tils                        controllers.Application.createTil
+PUT           /tils/:id                    controllers.Application.updateTil(id: Int)
+DELETE        /tils/:id                    controllers.Application.deleteTil(id:Int)
+
+#Tracks
+GET           /tracks/:id                  controllers.Application.track(id: Int)
+GET           /tracks                      controllers.Application.tracks
+GET           /tracks/node/:id             controllers.Application.tracksNode(id:Int)
+GET           /tracks/user/:id             controllers.Application.tracksUser(id: String)
+POST          /tracks                      controllers.Application.createTrack
+PUT           /tracks/:id                  controllers.Application.updateTrack(id: Int)
+DELETE        /tracks/:id                  controllers.Application.deleteTrack(id: Int)
+
+#Nodes
+GET           /nodes/:id                   controllers.Application.node(id: Int)
+GET           /nodes                       controllers.Application.nodes
+GET           /nodes/type/:typeOf          controllers.Application.nodesType(typeOf: String)
+GET           /nodes/childrenof/:id        controllers.Application.childrenOf(id: Int)
+POST          /nodes                       controllers.Application.createNode
+PUT           /nodes/:id                   controllers.Application.updateNode(id: Int)
+DELETE        /nodes/:id                   controllers.Application.deleteNode(id: Int)
