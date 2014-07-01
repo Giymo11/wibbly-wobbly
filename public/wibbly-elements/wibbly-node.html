@@ -95,12 +95,33 @@
                 padding-top: 8px;
                 padding-bottom: 8px;
             }
-            img {
-                height: 64px;
-                width: 64px;
-                border-radius: 50%;
+            .collab {
+                position: relative;
                 margin-left: 8px;
                 margin-bottom: 8px;
+            }
+            .circle {
+                border-radius: 50%;
+                height: 64px;
+                width: 64px;
+            }
+            .overlay {
+                position: absolute;
+                top: 0px;
+                left: 0px;
+                background: rgba(0, 0, 0, 0.54);
+                opacity: 0;
+                transition: opacity .25s ease;
+            }
+            .collab:hover .overlay {
+                opacity: 1;
+            }
+            .percentage {
+                color: rgba(255,255, 255, 0.87);
+                display: table;
+                margin: auto;
+                width: 100%;
+                text-align: center;
             }
         </style>
         <template if="{{!extended}}">
@@ -129,9 +150,14 @@
                         <h5>{{shortdesc}}</h5>
                         <p class="longdesc">{{longdesc}}</p>
                     </div>
-                    <div vertival layout>
+                    <div vertical layout>
                         <template repeat="{{ collab in collabs }}">
-                            <img src="{{collab.pic}}" />
+                            <div class="collab cirlce">
+                                <img class="circle" src="{{collab.pic}}" />
+                                <div class="overlay circle">
+                                    <span class="percentage" fit>{{collab.contrib}}</span>
+                                </div>
+                            </div>
                         </template>
                     </div>
                 </div>
